@@ -114,9 +114,26 @@ int main()
                                             false, false, true, false, false, true, false, false,
                                             false, false, false, true, true, false, false, false};
     static bool nextGrid[xSize][ySize] = {};
-    //fillArray(firstGrid);
-    //fillArrayv2(firstGrid);
-    
+    int chooseCase;
+    std::cout << "How would you like to fill your Array? 8x8\n";
+    std::cout << "1. Give me an example on how it works\n";
+    std::cout << "2. One by one, 0s and 1s\n";
+    std::cout << "3. Type in coordinates i want to set to true\n";
+    std::cin >> chooseCase;
+    system("cls");
+    switch (chooseCase)
+    {
+    case 1:
+        break;
+    case 2:
+        fillArray(firstGrid);
+        break;
+    case 3:
+        fillArrayv2(firstGrid);
+        break;
+    default:
+        return 0;
+    }    
     while (true)
     {
         system("cls");
