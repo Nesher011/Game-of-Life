@@ -1,8 +1,10 @@
 #include <iostream>
 #include <Windows.h>
+#include <time.h>
+#include <WinUser.h>
 
-#define xSize 8
-#define ySize 8
+#define xSize 40
+#define ySize 40
 
 void printGrid(bool grid[xSize][ySize])
 {
@@ -64,28 +66,13 @@ void replaceArray(bool grid[xSize][ySize], bool nextGrid[xSize][ySize])
     }
 }
 
-void fillArray(bool grid[xSize][ySize])
-{
-    static bool arrayFiller{ 0 };
-    std::cout << "Fill an array[5][5]\n";
-    for (int i = 0; i < xSize; i++)
-    {
-        for (int j = 0; j < ySize; j++)
-        {
-            std::cout << "Array[" << i + 1 << "][" << j + 1 << "] = ";
-            std::cin >> grid[i][j];
-            std::cout << '\n';
-        }
-    }
-}
-
 void fillArrayv2(bool grid[xSize][ySize])
 {
     for (int i = 0; i < xSize; i++)
     {
         for (int j = 0; j < ySize; j++)
         {
-            grid[i][j] = false;;
+            grid[i][j] = false;
         }
     }
     int x{ 0 }, y{ 0 };
@@ -101,35 +88,37 @@ void fillArrayv2(bool grid[xSize][ySize])
     }
 }
 
+void fillArrayv3(bool grid[xSize][ySize])
+{
+    for (int i = 0; i < xSize; i++)
+    {
+        for (int j = 0; j < ySize; j++)
+        {
+            grid[i][j] = rand()%2;
+        }
+    }
+}
+
 
 int main()
 {
+    SetCursorPos(0, 0);
+    srand(time(NULL));
     //static bool firstGrid[xSize][ySize] = {};
-    static bool firstGrid[xSize][ySize] = { false, false, false, true, true, false, false, false,
-                                            false, false, true, false, false, true, false, false,
-                                            false, true, false, false, false, false, true, false,
-                                            true, false, false, false, false, false, false, true,
-                                            true, false, false, false, false, false, false, true,
-                                            false, true, false, false, false, false, true, false,
-                                            false, false, true, false, false, true, false, false,
-                                            false, false, false, true, true, false, false, false};
+    static bool firstGrid[xSize][ySize] = {};
     static bool nextGrid[xSize][ySize] = {};
     int chooseCase;
-    std::cout << "How would you like to fill your Array? 8x8\n";
-    std::cout << "1. Give me an example on how it works\n";
-    std::cout << "2. One by one, 0s and 1s\n";
-    std::cout << "3. Type in coordinates i want to set to true\n";
+    std::cout << "1. Type in coordinates i want to set to true\n";
+    std::cout << "2. Have some fun with random 40x40 array\n";
     std::cin >> chooseCase;
     system("cls");
     switch (chooseCase)
     {
     case 1:
+        fillArrayv2(firstGrid);
         break;
     case 2:
-        fillArray(firstGrid);
-        break;
-    case 3:
-        fillArrayv2(firstGrid);
+        fillArrayv3(firstGrid);
         break;
     default:
         return 0;
